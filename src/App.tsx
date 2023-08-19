@@ -2,12 +2,14 @@ import { useRef, useState } from "react";
 import OperandButton from "./components/OperandButton";
 import OperatorButton from "./components/OperatorButton";
 import SpecialButton from "./components/SpecialButton";
+import CustomTranslationAnimationInLineCSS from "./components/CustomTranslationAnimationInLineCSS";
 
 function App() {
   const [firstOperand, setFirstOperand] = useState(0);
   const [secondOperand, setSecondOperand] = useState<number | null>(null);
   const [operator, setOperator] = useState<string | null>(null);
   const [decimal, setDecimal] = useState<number | null>(null);
+  const [reAnimation, setreAnimation] = useState(0);
   const results = useRef(0);
 
   function operandHandle(num: number) {
@@ -91,6 +93,7 @@ function App() {
         setOperator(null);
         setDecimal(null);
         results.current = 0;
+        handleReload();
         break;
       case "C":
         setSecondOperand(null);
@@ -131,16 +134,22 @@ function App() {
     }
   }
 
+  function handleReload() {
+    setreAnimation(reAnimation + 1);
+  }
+
   return (
     <div className="calculator">
-      <div className="results">
-        <label style={{ padding: "5px 10px" }}>
-          {results.current > 10 ** 7
-            ? results.current.toExponential(1)
-            : !Number.isInteger(results.current)
-            ? results.current.toFixed(3)
-            : results.current}
-        </label>
+      <div className="results" key={reAnimation}>
+        <CustomTranslationAnimationInLineCSS>
+          <label style={{ padding: "5px 10px" }}>
+            {results.current > 10 ** 7
+              ? results.current.toExponential(1)
+              : !Number.isInteger(results.current)
+              ? results.current.toFixed(3)
+              : results.current}
+          </label>
+        </CustomTranslationAnimationInLineCSS>
       </div>
       <div className="keyboard">
         <SpecialButton
