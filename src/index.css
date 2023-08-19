@@ -16,7 +16,7 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.results {
+.displayValue {
   width: 100%;
   display: flex;
   justify-content: end;

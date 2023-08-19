@@ -10,7 +10,7 @@ function App() {
   const [operator, setOperator] = useState<string | null>(null);
   const [isDecimal, isSetDecimal] = useState<number | null>(null);
   const [reAnimation, setreAnimation] = useState(0);
-  const results = useRef(0);
+  const displayValue = useRef(0);
 
   function operandHandle(num: number) {
     if (operator === null) {
@@ -18,12 +18,12 @@ function App() {
         const temp = firstOperand + num * 0.1 ** isDecimal;
         setFirstOperand(temp);
         isSetDecimal((prev) => prev! + 1);
-        results.current = temp;
+        displayValue.current = temp;
         return;
       }
       const temp = firstOperand * 10 + num;
       setFirstOperand(temp);
-      results.current = temp;
+      displayValue.current = temp;
       return;
     }
     if (secondOperand === null) {
@@ -31,11 +31,11 @@ function App() {
         const temp = num * 0.1 ** isDecimal;
         setSecondOperand(temp);
         isSetDecimal((prev) => prev! + 1);
-        results.current = temp;
+        displayValue.current = temp;
         return;
       }
       setSecondOperand(num);
-      results.current = num;
+      displayValue.current = num;
       return;
     }
     if (secondOperand !== null) {
@@ -43,12 +43,12 @@ function App() {
         const temp = secondOperand + num * 0.1 ** isDecimal;
         setSecondOperand(temp);
         isSetDecimal((prev) => prev! + 1);
-        results.current = temp;
+        displayValue.current = temp;
         return;
       }
       const temp = secondOperand * 10 + num;
       setSecondOperand(temp);
-      results.current = temp;
+      displayValue.current = temp;
       return;
     }
   }
@@ -81,7 +81,7 @@ function App() {
         setOperator(ops);
       }
       isSetDecimal(null);
-      results.current = calculation!;
+      displayValue.current = calculation!;
     }
   }
 
@@ -92,25 +92,25 @@ function App() {
         setSecondOperand(null);
         setOperator(null);
         isSetDecimal(null);
-        results.current = 0;
+        displayValue.current = 0;
         handleReload();
         break;
       case "C":
         setSecondOperand(null);
         isSetDecimal(null);
-        results.current = 0;
+        displayValue.current = 0;
         break;
       case "%":
         if (secondOperand !== null) {
           const temp = secondOperand * 0.01;
           setSecondOperand(temp);
-          results.current = temp;
+          displayValue.current = temp;
           break;
         }
         if (firstOperand !== null) {
           const temp = firstOperand * 0.01;
           setFirstOperand(temp);
-          results.current = temp;
+          displayValue.current = temp;
           break;
         }
         break;
@@ -118,13 +118,13 @@ function App() {
         if (secondOperand !== null) {
           const temp = secondOperand * -1;
           setSecondOperand(temp);
-          results.current = temp;
+          displayValue.current = temp;
           break;
         }
         if (firstOperand !== null) {
           const temp = firstOperand * -1;
           setFirstOperand(temp);
-          results.current = temp;
+          displayValue.current = temp;
           break;
         }
         break;
@@ -140,14 +140,14 @@ function App() {
 
   return (
     <div className="calculator">
-      <div className="results" key={reAnimation}>
+      <div className="displayValue" key={reAnimation}>
         <CustomTranslationAnimationInLineCSS>
           <label style={{ padding: "5px 10px" }}>
-            {results.current > 10 ** 7
-              ? results.current.toExponential(1)
-              : !Number.isInteger(results.current)
-              ? results.current.toFixed(3)
-              : results.current}
+            {displayValue.current > 10 ** 7
+              ? displayValue.current.toExponential(1)
+              : !Number.isInteger(displayValue.current)
+              ? displayValue.current.toFixed(3)
+              : displayValue.current}
           </label>
         </CustomTranslationAnimationInLineCSS>
       </div>
