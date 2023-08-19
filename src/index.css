@@ -1,13 +1,106 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@200;400;700&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  background-color: #001d3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.results {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  font-size: 4rem;
+}
+
+.calculator {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.keyboard {
+  font-size: 2.2rem;
+  width: 100%;
+  height: 68%;
+  display: grid;
+  grid-template-columns: repeat(4, 20vw);
+  grid-template-rows: repeat(5, 20vw);
+  justify-content: space-evenly;
+  align-content: space-evenly;
+}
+
+.operandButton {
+  /* reset default button styles */
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+
+  background-color: #505050;
+  border-radius: 100%;
+}
+
+.operatorButton {
+  /* reset default button styles */
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+
+  background-color: #ff9500;
+  border-radius: 100%;
+  padding-bottom: 5px;
+}
+
+.specialButton {
+  /* reset default button styles */
+  border: none;
+  color: #1c1c1c;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+
+  background-color: #d4d4d2;
+  border-radius: 100%;
+}
+
+.zeroButton {
+  display: flex;
+  grid-column: 1 / span 2;
+  border-radius: 50px;
+  justify-content: start;
+  align-items: center;
+  padding-left: 20%;
+}
+
+button:active {
+  filter: brightness(150%);
+}
+
+@media screen and (min-width: 481px) {
+  .calculator {
+    width: 375px;
+    height: 812px;
+  }
+  .keyboard {
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(5, 80px);
+  }
 }
