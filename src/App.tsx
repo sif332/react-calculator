@@ -8,16 +8,16 @@ function App() {
   const [firstOperand, setFirstOperand] = useState(0);
   const [secondOperand, setSecondOperand] = useState<number | null>(null);
   const [operator, setOperator] = useState<string | null>(null);
-  const [decimal, setDecimal] = useState<number | null>(null);
+  const [isDecimal, isSetDecimal] = useState<number | null>(null);
   const [reAnimation, setreAnimation] = useState(0);
   const results = useRef(0);
 
   function operandHandle(num: number) {
     if (operator === null) {
-      if (decimal !== null) {
-        const temp = firstOperand + num * 0.1 ** decimal;
+      if (isDecimal !== null) {
+        const temp = firstOperand + num * 0.1 ** isDecimal;
         setFirstOperand(temp);
-        setDecimal((prev) => prev! + 1);
+        isSetDecimal((prev) => prev! + 1);
         results.current = temp;
         return;
       }
@@ -27,10 +27,10 @@ function App() {
       return;
     }
     if (secondOperand === null) {
-      if (decimal !== null) {
-        const temp = num * 0.1 ** decimal;
+      if (isDecimal !== null) {
+        const temp = num * 0.1 ** isDecimal;
         setSecondOperand(temp);
-        setDecimal((prev) => prev! + 1);
+        isSetDecimal((prev) => prev! + 1);
         results.current = temp;
         return;
       }
@@ -39,10 +39,10 @@ function App() {
       return;
     }
     if (secondOperand !== null) {
-      if (decimal !== null) {
-        const temp = secondOperand + num * 0.1 ** decimal;
+      if (isDecimal !== null) {
+        const temp = secondOperand + num * 0.1 ** isDecimal;
         setSecondOperand(temp);
-        setDecimal((prev) => prev! + 1);
+        isSetDecimal((prev) => prev! + 1);
         results.current = temp;
         return;
       }
@@ -56,7 +56,7 @@ function App() {
   function operatorHandle(ops: string) {
     if (firstOperand !== null && secondOperand === null && ops !== "=") {
       setOperator(ops);
-      setDecimal(null);
+      isSetDecimal(null);
       return;
     }
     if (secondOperand !== null) {
@@ -80,7 +80,7 @@ function App() {
       if (ops !== "=") {
         setOperator(ops);
       }
-      setDecimal(null);
+      isSetDecimal(null);
       results.current = calculation!;
     }
   }
@@ -91,13 +91,13 @@ function App() {
         setFirstOperand(0);
         setSecondOperand(null);
         setOperator(null);
-        setDecimal(null);
+        isSetDecimal(null);
         results.current = 0;
         handleReload();
         break;
       case "C":
         setSecondOperand(null);
-        setDecimal(null);
+        isSetDecimal(null);
         results.current = 0;
         break;
       case "%":
@@ -129,7 +129,7 @@ function App() {
         }
         break;
       case ".":
-        setDecimal(1);
+        isSetDecimal(1);
         break;
     }
   }
