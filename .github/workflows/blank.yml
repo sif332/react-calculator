@@ -21,6 +21,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run Docker Compose up
-        run: docker-compose up --build
+        run: docker-compose up --build -d
         env:
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
