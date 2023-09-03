@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import OperandButton from "./components/OperandButton";
 import OperatorButton from "./components/OperatorButton";
 import SpecialButton from "./components/SpecialButton";
@@ -11,6 +11,10 @@ function App() {
   const [isDecimal, isSetDecimal] = useState<number | null>(null);
   const [reAnimation, setreAnimation] = useState(0);
   const displayValue = useRef(0);
+
+  useEffect(() => {
+    document.title = "iOS Calculator";
+  }, []);
 
   function operandHandle(num: number) {
     if (operator === null) {
